@@ -6,6 +6,7 @@ import android.util.Log
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,9 +17,8 @@ class MainActivity : AppCompatActivity() {
 
 
         someObservable
-            .map {
-            it.toDouble()
-        }.distinctUntilChanged()
+            .delay(  2000L, TimeUnit.MILLISECONDS )
+            .repeat(3)
             .subscribe(
                 {
                     Log.d("RxJava3", "onNext $it")
