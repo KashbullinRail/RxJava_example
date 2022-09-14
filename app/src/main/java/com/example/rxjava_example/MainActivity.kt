@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNext(t: Int) {
-                val devByZero = t/0
+                val devByZero = t*2
                 Log.d("RxJava3", "onNext2 ${devByZero}")
             }
 
@@ -58,7 +58,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         someObservable.subscribe(subscriber1)
-        someObservable.subscribe(subscriber2)
+        someObservable.subscribe({
+            it/0
+        },{
+            Log.d("RxJava3", "onError2.1 $it")
+        }
+        )
 
     }
 }
