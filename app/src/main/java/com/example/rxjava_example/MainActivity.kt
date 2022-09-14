@@ -3,9 +3,12 @@ package com.example.rxjava_example
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +20,10 @@ class MainActivity : AppCompatActivity() {
 
 
         someObservable
-            .delay(  2000L, TimeUnit.MILLISECONDS )
-            .repeat(3)
+            .doOnNext {
+                Log.d("RxJava3", "${Thread.currentThread().name}")
+            }
+            .subscribeOn(Schedulers.newThread())
             .subscribe(
                 {
                     Log.d("RxJava3", "onNext $it")
