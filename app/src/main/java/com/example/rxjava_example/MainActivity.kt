@@ -20,10 +20,12 @@ class MainActivity : AppCompatActivity() {
 
 
         someObservable
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(Schedulers.newThread())
             .doOnNext {
                 Log.d("RxJava3", "${Thread.currentThread().name}")
             }
-            .subscribeOn(Schedulers.newThread())
+
             .subscribe(
                 {
                     Log.d("RxJava3", "onNext $it")
