@@ -12,14 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val someObservable = Observable.just(1, 2, 3, 4, 5, 6, 7, 8, 9)
+        val someObservable = Observable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
 
 
-        someObservable.filter {
-            it % 3 == 0
-        }.map {
+        someObservable
+            .map {
             it.toDouble()
-        }
+        }.distinctUntilChanged()
             .subscribe(
                 {
                     Log.d("RxJava3", "onNext $it")
