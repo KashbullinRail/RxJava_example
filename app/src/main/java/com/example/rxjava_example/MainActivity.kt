@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val someObservable = Observable.just(1,2,3,4,5,6,7,8,9)
+            .doOnNext { it/0 }
 
         val subscriber1 = object : Observer<Int>{
             override fun onSubscribe(d: Disposable) {
@@ -58,12 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         someObservable.subscribe(subscriber1)
-        someObservable.subscribe({
-            it/0
-        },{
-            Log.d("RxJava3", "onError2.1 $it")
-        }
-        )
+        someObservable.subscribe(subscriber2)
 
     }
 }
