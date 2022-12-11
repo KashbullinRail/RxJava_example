@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
 
 
         someObservable
+            .filter {
+                it < 8
+            }
             .distinctUntilChanged()
             .map {
                 it.toDouble()
