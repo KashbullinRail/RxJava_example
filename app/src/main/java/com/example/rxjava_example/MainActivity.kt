@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
         someObservable
             .subscribeOn(Schedulers.newThread())
             .doOnNext {
-                Log.d("RxJava3", "${Thread.currentThread().name}")
+                Log.d("RxJava3", "doNExtOne ${Thread.currentThread().name}")
             }
             .observeOn(Schedulers.newThread())
             .doOnNext {
-                Log.d("RxJava3", "${Thread.currentThread().name}")
+                Log.d("RxJava3", "doNextTwo ${Thread.currentThread().name}")
             }
             .subscribe(
                 {
@@ -46,21 +46,21 @@ class MainActivity : AppCompatActivity() {
                 {},
                 {}
             )
-        Flowable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
-            .onBackpressureBuffer(4)
-            .subscribe({
-                Log.d("RxJava3", "doOnNextFlow $it")
-            },
-                {},
-                {}
-            )
-
-        Single.just(1)
-            .subscribe({
-
-            },{
-
-            })
+//        Flowable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
+//            .onBackpressureBuffer(4)
+//            .subscribe({
+//                Log.d("RxJava3", "doOnNextFlow $it")
+//            },
+//                {},
+//                {}
+//            )
+//
+//        Single.just(1)
+//            .subscribe({
+//
+//            },{
+//
+//            })
 
 
     }
