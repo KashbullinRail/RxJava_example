@@ -17,50 +17,50 @@ class MainActivity : AppCompatActivity() {
         val someObservable = Observable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
 
 
+//        someObservable
+//            .filter {
+//                it < 8
+//            }
+//            .distinctUntilChanged()
+//            .map {
+//                it.toDouble()
+//            }.subscribe(
+//                {
+//                Log.d("RxJava3test", "onNext $it")
+//                }, {}, {}
+//            )
+
         someObservable
-            .filter {
-                it < 8
+            .subscribeOn(Schedulers.newThread())
+            .doOnNext {
+                Log.d("RxJava3", "${Thread.currentThread().name}")
             }
-            .distinctUntilChanged()
-            .map {
-                it.toDouble()
-            }.subscribe(
+            .observeOn(Schedulers.newThread())
+            .doOnNext {
+                Log.d("RxJava3", "${Thread.currentThread().name}")
+            }
+            .subscribe(
                 {
-                Log.d("RxJava3test", "onNext $it")
-                }, {}, {}
+                    Log.d("RxJava3", "onNext $it")
+                },
+                {},
+                {}
+            )
+        Flowable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
+            .onBackpressureBuffer(4)
+            .subscribe({
+                Log.d("RxJava3", "doOnNextFlow $it")
+            },
+                {},
+                {}
             )
 
-//        someObservable
-//            .subscribeOn(Schedulers.newThread())
-//            .doOnNext {
-//                Log.d("RxJava3", "${Thread.currentThread().name}")
-//            }
-//            .observeOn(Schedulers.newThread())
-//            .doOnNext {
-//                Log.d("RxJava3", "${Thread.currentThread().name}")
-//            }
-//            .subscribe(
-//                {
-//                    Log.d("RxJava3", "onNext $it")
-//                },
-//                {},
-//                {}
-//            )
-//        Flowable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
-//            .onBackpressureBuffer(4)
-//            .subscribe({
-//                Log.d("RxJava3", "doOnNextFlow $it")
-//            },
-//                {},
-//                {}
-//            )
-//
-//        Single.just(1)
-//            .subscribe({
-//
-//            },{
-//
-//            })
+        Single.just(1)
+            .subscribe({
+
+            },{
+
+            })
 
 
     }
