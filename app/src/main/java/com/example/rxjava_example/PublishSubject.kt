@@ -1,10 +1,10 @@
 package com.example.rxjava_example
 
-
 import android.util.Log
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subjects.PublishSubject
+
 
 class PublishSubjectSample {
 
@@ -20,7 +20,6 @@ class PublishSubjectSample {
         source.onComplete()
     }
 }
-
 
 private fun getFirstObserver(): Observer<Int> {
     return object : Observer<Int> {

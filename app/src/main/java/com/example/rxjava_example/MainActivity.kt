@@ -3,7 +3,9 @@ package com.example.rxjava_example
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,8 +27,11 @@ class MainActivity : AppCompatActivity() {
         replay.doSomeWorkReplay()
         println("\n")
 
-
-
+        val myObservableAndFlowable = MyObservableAndFlowable()
+        myObservableAndFlowable.myObservableFun()
+        println("\n")
+        myObservableAndFlowable.myFlowableFun()
+        println("\n")
 
         val lesson = LessonExample()
         println("\n")

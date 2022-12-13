@@ -4,11 +4,15 @@ import android.util.Log
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+
 class LessonExample {
 
     fun lessonExample() {
 
-        val someObservable = Observable.just(1, 1, 3, 4, 1, 1, 7, 8, 9)
+        val someObservable = Observable.just(
+            1, 1, 3, 4, 1,
+            1, 7, 8, 9
+        )
 
 //        someObservable
 //            .filter {

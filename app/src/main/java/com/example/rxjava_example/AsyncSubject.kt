@@ -21,7 +21,6 @@ class AsyncSubjectSample {
     }
 }
 
-
 private fun getFirstObserver(): Observer<Int> {
     return object : Observer<Int> {
         override fun onSubscribe(d: Disposable) {
