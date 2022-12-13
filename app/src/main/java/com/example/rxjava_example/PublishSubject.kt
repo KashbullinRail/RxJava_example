@@ -1,0 +1,64 @@
+package com.example.rxjava_example
+
+import android.util.Log
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.PublishSubject
+
+
+class PublishSubjectSample {
+
+    fun doSomeWorkPublish() {
+        var source = PublishSubject.create<Int>()
+        source.subscribe(getFirstObserver())
+        source.onNext(1)
+        source.onNext(2)
+        source.onNext(3)
+
+        source.subscribe(getSecondObserver())
+        source.onNext(4)
+        source.onComplete()
+    }
+}
+
+private fun getFirstObserver(): Observer<Int> {
+    return object : Observer<Int> {
+        override fun onSubscribe(d: Disposable) {
+            Log.d("RxJava", "\n First onSubscribe Publish : + ${d.isDisposed()}")
+        }
+
+        override fun onNext(value: Int) {
+            Log.d("RxJava", " First onNext value Publish: $value")
+        }
+
+        override fun onError(e: Throwable) {
+            Log.d("RxJava", " First onError Publish : " + e.message)
+        }
+
+        override fun onComplete() {
+            Log.d("RxJava", " First onComplete Publish \n")
+        }
+    }
+}
+
+private fun getSecondObserver(): Observer<Int> {
+    return object : Observer<Int> {
+        override fun onSubscribe(d: Disposable) {
+            Log.d("RxJava", "\n Second onSubscribe Publish :  + ${d.isDisposed()} \n")
+        }
+
+        override fun onNext(value: Int) {
+            Log.d("RxJava", " Second onNext value Publish : $value")
+        }
+
+        override fun onError(e: Throwable) {
+            Log.d("RxJava", " Second onError Publish :  + ${e.message}")
+        }
+
+        override fun onComplete() {
+            Log.d("RxJava", " Second onComplete Publish \n")
+        }
+
+    }
+}
+
